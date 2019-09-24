@@ -7,7 +7,10 @@ export class ClosestTap extends Component {
     super(props);
 
     this.state = {
-        text : "Click me!"
+        textColor:"black",
+        padding: "1.25rem",
+        color: "light",
+        text : "Click me for closest tab!"
     };
 
     this.change = this.change.bind(this);
@@ -16,6 +19,9 @@ export class ClosestTap extends Component {
   change(){
     if(this.props.lat === "" || this.props.lon === ""){
       this.setState({
+        textColor:"white",
+        padding:0,
+        color:"failure",
         text: <p>
         The closest tap feature is unavailable. We require permission
         to access your location to provide it.
@@ -24,6 +30,9 @@ export class ClosestTap extends Component {
     }
     else{
       this.setState({
+        textColor:"white",
+        padding:0,
+        color: "success",
         text: <p>
         The closest tap is: {this.props.org} <br />
         Located at:   &nbsp;
@@ -44,12 +53,11 @@ export class ClosestTap extends Component {
 
   render() {
     return (
-      <div className = "closestTap">
-        <Card>
-          <Card.Header onClick={this.change}>
+      <div className = "closestTap"   >
+        <Card bg = {this.state.color}>
+          <Card.Body onClick={this.change} style = {{padding:  this.state.padding, color: this.state.textColor}}>
               {this.state.text}
-          </Card.Header>
-            
+          </Card.Body>   
         </Card>
       </div>
     );
