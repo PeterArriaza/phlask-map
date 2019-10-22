@@ -3,6 +3,7 @@ import "./App.css";
 import Foot from "./components/Foot";
 import Head from "./components/Head";
 import ReactGoogleMaps from "./components/ReactGoogleMaps";
+//import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 class App extends Component {
   render() {
@@ -12,6 +13,7 @@ class App extends Component {
         <ReactGoogleMaps />
         <Foot />
       </div>
+
     );
   }
 }
