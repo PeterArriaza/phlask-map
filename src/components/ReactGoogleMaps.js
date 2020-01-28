@@ -3,6 +3,9 @@ import React, { Component } from "react";
 import * as firebase from "firebase";
 import ClosestTap from "./ClosestTap";
 import "./ReactGoogleMaps.css";
+import SearchBar from "./Searchbar";
+// import SearchBox from "react-google-maps/lib/components/places/SearchBox";
+// import Geocode from "react-geocode";
 
 const config = {
   apiKey: "AIzaSyABw5Fg78SgvedyHr8tl-tPjcn5iFotB6I",
@@ -170,6 +173,10 @@ export class ReactGoogleMaps extends Component {
         break;
     }
   }
+  searchForLocation = location => {
+    // console.log(`location is ${location}`);
+    this.setState({ currlat: location.lat, currlon: location.lng });
+  };
 
   render() {
     if (this.state.taps.length) {
@@ -188,13 +195,14 @@ export class ReactGoogleMaps extends Component {
 
           <Map
             google={this.props.google}
-            className={"map"}
+            className="map"
             style={style}
             zoom={16}
             initialCenter={{
               lat: this.state.currlat,
               lng: this.state.currlon
             }}
+            center={{ lat: this.state.currlat, lng: this.state.currlon }}
           >
             <Marker
               key="current_pos"
@@ -237,6 +245,12 @@ export class ReactGoogleMaps extends Component {
               </div>
             </InfoWindow>
           </Map>
+          <div className="searchBarContainer">
+            <SearchBar
+              className="searchBar"
+              search={location => this.searchForLocation(location)}
+            />
+          </div>
         </div>
       );
     } else {
